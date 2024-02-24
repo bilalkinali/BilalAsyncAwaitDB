@@ -37,21 +37,21 @@
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv.Location = new Point(30, 12);
+            dgv.Location = new Point(12, 12);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
-            dgv.Size = new Size(730, 367);
+            dgv.Size = new Size(892, 367);
             dgv.TabIndex = 0;
-            dgv.VisibleChanged += this.dgv_VisibleChanged;
             // 
             // Overview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(916, 450);
             Controls.Add(dgv);
             Name = "Overview";
             Text = "Form1";
+            Load += Overview_Load;
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);
         }

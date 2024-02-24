@@ -1,14 +1,15 @@
 ﻿using Models;
 
+
 namespace DataAccess
 {
     public class PersonDA
     {
-        List<Person> persons;
+        List<Person> people;
 
         public PersonDA()
         {
-            persons = new List<Person>()
+            people = new List<Person>()
             {
                 new Person { Id = 1, FirstName = "Natalie", LastName = "Richards", Address = "25322 Rivera Stream Suite 328", City = "New Nathan", PostalCode = 92537, Email = "tkelly@lawson.com", Phone = 49412066 },
                 new Person { Id = 2, FirstName = "Natasha", LastName = "Stewart", Address = "25573 Anne Motorway", City = "Thomasshire", PostalCode = 42390, Email = "fgentry@yahoo.com", Phone = 97135562 },
@@ -27,7 +28,17 @@ namespace DataAccess
         {
             await Task.Delay(1000);
 
-            return persons;
+            return people;
+        }
+
+       public async Task<Person> GetAsync(int id)
+        {
+            await Task.Delay(1000);
+
+            Person? person = people.SingleOrDefault(p => p.Id == id);
+
+            // Return person or new person if null
+            return person ?? new Person();
         }
     }
 }

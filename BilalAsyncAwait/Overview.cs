@@ -8,12 +8,14 @@ namespace BilalAsyncAwait
         PersonBL bl;
         public Overview()
         {
-            InitializeComponent();
-
+            // Initialize bl before loading components to reduce risk of NullReferenceException
             bl = new PersonBL();
+
+            InitializeComponent();
         }
-
-
-
+        private async void Overview_Load(object sender, EventArgs e)
+        {
+            dgv.DataSource = await bl.GetAsync();
+        }
     }
 }
