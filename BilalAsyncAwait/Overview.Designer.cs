@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             dgv = new DataGridView();
+            btnCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             SuspendLayout();
             // 
@@ -42,16 +43,29 @@
             dgv.ReadOnly = true;
             dgv.Size = new Size(892, 367);
             dgv.TabIndex = 0;
+            dgv.CellDoubleClick += dgv_CellDoubleClick;
+            // 
+            // btnCreate
+            // 
+            btnCreate.Location = new Point(12, 385);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(75, 23);
+            btnCreate.TabIndex = 1;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Click += btnCreate_Click;
             // 
             // Overview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(916, 450);
+            Controls.Add(btnCreate);
             Controls.Add(dgv);
             Name = "Overview";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
-            Load += Overview_Load;
+            Load += Overview_LoadAsync;
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);
         }
@@ -59,5 +73,6 @@
         #endregion
 
         private DataGridView dgv;
+        private Button btnCreate;
     }
 }

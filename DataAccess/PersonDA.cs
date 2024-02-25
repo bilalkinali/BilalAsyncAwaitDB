@@ -23,22 +23,39 @@ namespace DataAccess
                 new Person { Id = 10, FirstName = "Tony", LastName = "Fletcher", Address = "38388 Sanchez River", City = "Lake Michaelside", PostalCode = 36352, Email = "westyvonne@hotmail.com", Phone = 61472543 }
             };
         }
+
+        public async Task<bool> CreateAsync(Person p)
+        {
+            int id = people.Max(x => x.Id) + 1;
+
+            p.Id = id;
+
+            await Task.Delay(1000);
+
+            people.Add(p);
+
+            return true;
+        }
         
         public async Task<List<Person>> GetAsync()
         {
             await Task.Delay(1000);
-
             return people;
         }
 
-       public async Task<Person> GetAsync(int id)
+        public async Task<Person> GetAsync(int id)
         {
-            await Task.Delay(1000);
-
             Person? person = people.SingleOrDefault(p => p.Id == id);
 
+            await Task.Delay(1000);
             // Return person or new person if null
             return person ?? new Person();
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            await Task.Delay(1000);
+            return people.RemoveAll(p => p.Id == id) > 0;
         }
     }
 }
