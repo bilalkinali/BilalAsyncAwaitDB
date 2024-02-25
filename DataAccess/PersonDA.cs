@@ -30,7 +30,7 @@ namespace DataAccess
 
             p.Id = id;
 
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
             people.Add(p);
 
@@ -39,7 +39,7 @@ namespace DataAccess
         
         public async Task<List<Person>> GetAsync()
         {
-            await Task.Delay(1000);
+            await Task.Delay(3000);
             return people;
         }
 
@@ -47,14 +47,14 @@ namespace DataAccess
         {
             Person? person = people.SingleOrDefault(p => p.Id == id);
 
-            await Task.Delay(1000);
+            await Task.Delay(3000);
             // Return person or new person if null
             return person ?? new Person();
         }
 
         public async Task<bool> UpdateAsync(Person p)
         {
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
             int index = people.FindIndex(x => x.Id == p.Id);
 
@@ -68,7 +68,7 @@ namespace DataAccess
 
         public async Task<bool> DeleteAsync(int id)
         {
-            await Task.Delay(1000);
+            await Task.Delay(3000);
             return people.RemoveAll(p => p.Id == id) > 0;
         }
     }
