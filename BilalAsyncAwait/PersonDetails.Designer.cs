@@ -43,61 +43,71 @@
             lblLastName = new Label();
             lblFirstName = new Label();
             btnDelete = new Button();
+            btnUpdate = new Button();
+            btnBack = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // tboxPhone
             // 
-            tboxPhone.Location = new Point(227, 338);
+            tboxPhone.Location = new Point(111, 302);
             tboxPhone.Name = "tboxPhone";
-            tboxPhone.Size = new Size(100, 23);
+            tboxPhone.Size = new Size(69, 23);
             tboxPhone.TabIndex = 27;
+            tboxPhone.TextChanged += tboxPhone_TextChanged;
             // 
             // tboxEmail
             // 
-            tboxEmail.Location = new Point(227, 293);
+            tboxEmail.Location = new Point(111, 257);
             tboxEmail.Name = "tboxEmail";
-            tboxEmail.Size = new Size(100, 23);
+            tboxEmail.Size = new Size(174, 23);
             tboxEmail.TabIndex = 26;
+            tboxEmail.TextChanged += tboxEmail_TextChanged;
             // 
             // tboxPostCode
             // 
-            tboxPostCode.Location = new Point(227, 252);
+            tboxPostCode.Location = new Point(111, 216);
             tboxPostCode.Name = "tboxPostCode";
-            tboxPostCode.Size = new Size(100, 23);
+            tboxPostCode.Size = new Size(39, 23);
             tboxPostCode.TabIndex = 25;
+            tboxPostCode.TextChanged += tboxPostCode_TextChanged;
             // 
             // tboxCity
             // 
-            tboxCity.Location = new Point(227, 207);
+            tboxCity.Location = new Point(111, 171);
             tboxCity.Name = "tboxCity";
-            tboxCity.Size = new Size(100, 23);
+            tboxCity.Size = new Size(174, 23);
             tboxCity.TabIndex = 24;
+            tboxCity.TextChanged += tboxCity_TextChanged;
             // 
             // tboxAddress
             // 
-            tboxAddress.Location = new Point(227, 165);
+            tboxAddress.Location = new Point(111, 129);
             tboxAddress.Name = "tboxAddress";
-            tboxAddress.Size = new Size(100, 23);
+            tboxAddress.Size = new Size(174, 23);
             tboxAddress.TabIndex = 23;
+            tboxAddress.TextChanged += tboxAddress_TextChanged;
             // 
             // tboxLastName
             // 
-            tboxLastName.Location = new Point(227, 119);
+            tboxLastName.Location = new Point(111, 83);
             tboxLastName.Name = "tboxLastName";
-            tboxLastName.Size = new Size(100, 23);
+            tboxLastName.Size = new Size(96, 23);
             tboxLastName.TabIndex = 22;
+            tboxLastName.TextChanged += tboxLastName_TextChanged;
             // 
             // tboxFirstName
             // 
-            tboxFirstName.Location = new Point(227, 75);
+            tboxFirstName.Location = new Point(111, 39);
             tboxFirstName.Name = "tboxFirstName";
-            tboxFirstName.Size = new Size(100, 23);
+            tboxFirstName.Size = new Size(96, 23);
             tboxFirstName.TabIndex = 21;
+            tboxFirstName.TextChanged += tboxFirstName_TextChanged;
             // 
             // lblPhone
             // 
             lblPhone.AutoSize = true;
-            lblPhone.Location = new Point(150, 346);
+            lblPhone.Location = new Point(65, 305);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(44, 15);
             lblPhone.TabIndex = 20;
@@ -106,7 +116,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(150, 301);
+            lblEmail.Location = new Point(65, 260);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(44, 15);
             lblEmail.TabIndex = 19;
@@ -115,7 +125,7 @@
             // lblPostalCode
             // 
             lblPostalCode.AutoSize = true;
-            lblPostalCode.Location = new Point(150, 260);
+            lblPostalCode.Location = new Point(38, 219);
             lblPostalCode.Name = "lblPostalCode";
             lblPostalCode.Size = new Size(71, 15);
             lblPostalCode.TabIndex = 18;
@@ -124,7 +134,7 @@
             // lblCity
             // 
             lblCity.AutoSize = true;
-            lblCity.Location = new Point(150, 215);
+            lblCity.Location = new Point(78, 174);
             lblCity.Name = "lblCity";
             lblCity.Size = new Size(31, 15);
             lblCity.TabIndex = 17;
@@ -133,7 +143,7 @@
             // lblAddress
             // 
             lblAddress.AutoSize = true;
-            lblAddress.Location = new Point(150, 173);
+            lblAddress.Location = new Point(57, 132);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(52, 15);
             lblAddress.TabIndex = 16;
@@ -142,7 +152,7 @@
             // lblLastName
             // 
             lblLastName.AutoSize = true;
-            lblLastName.Location = new Point(150, 127);
+            lblLastName.Location = new Point(48, 86);
             lblLastName.Name = "lblLastName";
             lblLastName.Size = new Size(61, 15);
             lblLastName.TabIndex = 15;
@@ -151,7 +161,7 @@
             // lblFirstName
             // 
             lblFirstName.AutoSize = true;
-            lblFirstName.Location = new Point(150, 83);
+            lblFirstName.Location = new Point(47, 42);
             lblFirstName.Name = "lblFirstName";
             lblFirstName.Size = new Size(62, 15);
             lblFirstName.TabIndex = 14;
@@ -160,19 +170,49 @@
             // btnDelete
             // 
             btnDelete.ForeColor = Color.OrangeRed;
-            btnDelete.Location = new Point(150, 393);
+            btnDelete.Location = new Point(132, 377);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 23);
             btnDelete.TabIndex = 28;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_ClickAsync;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(243, 377);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(75, 23);
+            btnUpdate.TabIndex = 29;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += bntUpdate_Click;
+            // 
+            // btnBack
+            // 
+            btnBack.Location = new Point(19, 377);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(75, 23);
+            btnBack.TabIndex = 30;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
+            // 
+            // panel1
+            // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new Point(19, 21);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(299, 329);
+            panel1.TabIndex = 31;
             // 
             // PersonDetails
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(340, 424);
+            Controls.Add(btnBack);
+            Controls.Add(btnUpdate);
             Controls.Add(btnDelete);
             Controls.Add(tboxPhone);
             Controls.Add(tboxEmail);
@@ -188,10 +228,13 @@
             Controls.Add(lblAddress);
             Controls.Add(lblLastName);
             Controls.Add(lblFirstName);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "PersonDetails";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "PersonDetails";
-            Load += PersonDetails_LoadAsync;
+            Text = "Person Details";
+            Load += PersonDetails_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -213,5 +256,8 @@
         private Label lblLastName;
         private Label lblFirstName;
         private Button btnDelete;
+        private Button btnUpdate;
+        private Button btnBack;
+        private Panel panel1;
     }
 }

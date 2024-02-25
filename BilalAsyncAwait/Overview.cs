@@ -14,14 +14,15 @@ namespace BilalAsyncAwait
 
             InitializeComponent();
         }
-        private async void Overview_LoadAsync(object sender, EventArgs e)
+        private async void Overview_Load(object sender, EventArgs e)
         {
-            dgv.DataSource = await bl.GetAsync();
+            RefreshDgvAsync();
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
             PersonCreate pc = new PersonCreate(bl);
+            pc.OnPersonCreateOpen += RefreshDgvAsync;
             pc.ShowDialog();
         }
 
@@ -31,11 +32,11 @@ namespace BilalAsyncAwait
 
             if (rIndex >= 0)
             {
-                ShowPersonDetailsAsync(rIndex); 
+                ShowPersonDetails(rIndex);
             }
         }
 
-        private async void ShowPersonDetailsAsync(int rIndex)
+        private void ShowPersonDetails(int rIndex)
         {
             int id = (int)dgv.Rows[rIndex].Cells[0].Value;
 
@@ -43,11 +44,42 @@ namespace BilalAsyncAwait
             pd.OnPersonDetailsOpen += RefreshDgvAsync;
             pd.ShowDialog();
         }
+        private void dgv_SelectionChanged(object sender, EventArgs e)
+        {
+            int selected = dgv.SelectedRows.Count;
+            if (selected == 0)
+            {
+                lblSelected.Visible = false;
+                tboxSelected.Visible = false;
+            }
+            else
+            {
+                lblSelected.Visible = true;
+                tboxSelected.Visible = true;
+                tboxSelected.Text = selected.ToString();
+            }
+        }
 
         private async void RefreshDgvAsync()
         {
             dgv.DataSource = null;
-            dgv.DataSource = await bl.GetAsync();
+            try
+            {
+                dgv.DataSource = await bl.GetAsync();
+                tboxTotal.Text = dgv.RowCount.ToString();
+                dgv.Columns[0].Visible = false;
+                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(
+                    $"An unknown error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
