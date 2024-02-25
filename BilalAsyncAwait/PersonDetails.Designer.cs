@@ -53,7 +53,7 @@
             tboxPhone.Location = new Point(111, 302);
             tboxPhone.Name = "tboxPhone";
             tboxPhone.Size = new Size(69, 23);
-            tboxPhone.TabIndex = 27;
+            tboxPhone.TabIndex = 6;
             tboxPhone.TextChanged += tboxPhone_TextChanged;
             // 
             // tboxEmail
@@ -61,7 +61,7 @@
             tboxEmail.Location = new Point(111, 257);
             tboxEmail.Name = "tboxEmail";
             tboxEmail.Size = new Size(174, 23);
-            tboxEmail.TabIndex = 26;
+            tboxEmail.TabIndex = 5;
             tboxEmail.TextChanged += tboxEmail_TextChanged;
             // 
             // tboxPostCode
@@ -69,7 +69,7 @@
             tboxPostCode.Location = new Point(111, 216);
             tboxPostCode.Name = "tboxPostCode";
             tboxPostCode.Size = new Size(39, 23);
-            tboxPostCode.TabIndex = 25;
+            tboxPostCode.TabIndex = 4;
             tboxPostCode.TextChanged += tboxPostCode_TextChanged;
             // 
             // tboxCity
@@ -77,7 +77,7 @@
             tboxCity.Location = new Point(111, 171);
             tboxCity.Name = "tboxCity";
             tboxCity.Size = new Size(174, 23);
-            tboxCity.TabIndex = 24;
+            tboxCity.TabIndex = 3;
             tboxCity.TextChanged += tboxCity_TextChanged;
             // 
             // tboxAddress
@@ -85,7 +85,7 @@
             tboxAddress.Location = new Point(111, 129);
             tboxAddress.Name = "tboxAddress";
             tboxAddress.Size = new Size(174, 23);
-            tboxAddress.TabIndex = 23;
+            tboxAddress.TabIndex = 2;
             tboxAddress.TextChanged += tboxAddress_TextChanged;
             // 
             // tboxLastName
@@ -93,7 +93,7 @@
             tboxLastName.Location = new Point(111, 83);
             tboxLastName.Name = "tboxLastName";
             tboxLastName.Size = new Size(96, 23);
-            tboxLastName.TabIndex = 22;
+            tboxLastName.TabIndex = 1;
             tboxLastName.TextChanged += tboxLastName_TextChanged;
             // 
             // tboxFirstName
@@ -101,7 +101,7 @@
             tboxFirstName.Location = new Point(111, 39);
             tboxFirstName.Name = "tboxFirstName";
             tboxFirstName.Size = new Size(96, 23);
-            tboxFirstName.TabIndex = 21;
+            tboxFirstName.TabIndex = 0;
             tboxFirstName.TextChanged += tboxFirstName_TextChanged;
             // 
             // lblPhone
@@ -173,7 +173,7 @@
             btnDelete.Location = new Point(132, 377);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 23);
-            btnDelete.TabIndex = 28;
+            btnDelete.TabIndex = 9;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
@@ -183,7 +183,7 @@
             btnUpdate.Location = new Point(243, 377);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(75, 23);
-            btnUpdate.TabIndex = 29;
+            btnUpdate.TabIndex = 7;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += bntUpdate_Click;
@@ -193,7 +193,7 @@
             btnBack.Location = new Point(19, 377);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(75, 23);
-            btnBack.TabIndex = 30;
+            btnBack.TabIndex = 8;
             btnBack.Text = "Back";
             btnBack.UseVisualStyleBackColor = true;
             btnBack.Click += btnBack_Click;

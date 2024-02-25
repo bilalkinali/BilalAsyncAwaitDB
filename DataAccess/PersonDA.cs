@@ -26,11 +26,11 @@ namespace DataAccess
 
         public async Task<bool> CreateAsync(Person p)
         {
+            await Task.Delay(3000);
+
             int id = people.Max(x => x.Id) + 1;
 
             p.Id = id;
-
-            await Task.Delay(3000);
 
             people.Add(p);
 
@@ -45,9 +45,10 @@ namespace DataAccess
 
         public async Task<Person> GetAsync(int id)
         {
-            Person? person = people.SingleOrDefault(p => p.Id == id);
-
             await Task.Delay(3000);
+
+            Person? person = people.SingleOrDefault(p => p.Id == id);
+            
             // Return person or new person if null
             return person ?? new Person();
         }

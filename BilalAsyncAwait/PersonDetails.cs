@@ -34,6 +34,7 @@ namespace UI
             InitializeComponent();
 
             btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
         }
         private async void PersonDetails_Load(object sender, EventArgs e)
         {
@@ -48,6 +49,8 @@ namespace UI
                 tboxPostCode.Text = p.PostalCode.ToString();
                 tboxEmail.Text = p.Email;
                 tboxPhone.Text = p.Phone.ToString();
+
+                btnDelete.Enabled = true;
             }
         }
         private async void bntUpdate_Click(object sender, EventArgs e)
@@ -64,6 +67,8 @@ namespace UI
 
             if (answer == DialogResult.Yes)
             {
+                btnUpdate.Enabled = false;
+
                 try
                 {
                     p.FirstName = tboxFirstName.Text;
@@ -96,6 +101,10 @@ namespace UI
                     MessageBox.Show(
                         "An unknown error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                finally
+                {
+                    btnUpdate.Enabled = true;
+                }
             }
         }
 
@@ -116,6 +125,9 @@ namespace UI
 
             if (answer == DialogResult.Yes)
             {
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+
                 try
                 {
                     bool result = await bl.DeleteAsync(id);
@@ -132,6 +144,8 @@ namespace UI
                     }
                     else
                     {
+                        btnDelete.Enabled = true;
+                        btnUpdate.Enabled = true;
                         MessageBox.Show(
                             "The contact could not be removed due to an unexpected error.\n\n" +
                             "Contact doesn't exits.",
@@ -140,6 +154,8 @@ namespace UI
                 }
                 catch (Exception)
                 {
+                    btnDelete.Enabled = true;
+                    btnUpdate.Enabled = true;
                     MessageBox.Show(
                         $"An unknown error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

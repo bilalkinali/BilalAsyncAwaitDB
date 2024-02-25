@@ -14,7 +14,7 @@ namespace BilalAsyncAwait
 
             InitializeComponent();
         }
-        private async void Overview_Load(object sender, EventArgs e)
+        private void Overview_Load(object sender, EventArgs e)
         {
             RefreshDgvAsync();
         }
@@ -47,17 +47,8 @@ namespace BilalAsyncAwait
         private void dgv_SelectionChanged(object sender, EventArgs e)
         {
             int selected = dgv.SelectedRows.Count;
-            if (selected == 0)
-            {
-                lblSelected.Visible = false;
-                tboxSelected.Visible = false;
-            }
-            else
-            {
-                lblSelected.Visible = true;
-                tboxSelected.Visible = true;
-                tboxSelected.Text = selected.ToString();
-            }
+
+            tboxSelected.Text = selected.ToString();
         }
 
         private async void RefreshDgvAsync()
@@ -68,7 +59,9 @@ namespace BilalAsyncAwait
                 dgv.DataSource = await bl.GetAsync();
                 tboxTotal.Text = dgv.RowCount.ToString();
                 dgv.Columns[0].Visible = false;
-                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgv.Columns["Address"].MinimumWidth = 170;
+                dgv.Columns["City"].MinimumWidth = 130;
+                dgv.Columns["Email"].MinimumWidth = 160;
             }
             catch (Exception)
             {

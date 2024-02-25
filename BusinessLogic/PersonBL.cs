@@ -17,7 +17,7 @@ namespace BusinessLogic
 
         public async Task<bool> CreateAsync(Person p)
         {
-            // Continue with Create if person as valid attribute values
+            // Continue with Create if person has valid attributes
             return validator.ValidPerson(p) ? await da.CreateAsync(p) : false;
         }
 
@@ -34,7 +34,7 @@ namespace BusinessLogic
 
         public async Task<bool> UpdateAsync(Person p)
         {
-            // Continue with Update if person as valid attribute values
+            // Continue with Update if person has valid attributs
             return validator.ValidPerson(p) ? await da.UpdateAsync(p) : false;
         }
 

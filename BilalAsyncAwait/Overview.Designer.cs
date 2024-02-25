@@ -42,13 +42,18 @@
             // 
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.Location = new Point(12, 12);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.ShowCellToolTips = false;
+            dgv.ShowEditingIcon = false;
+            dgv.ShowRowErrors = false;
             dgv.Size = new Size(892, 306);
-            dgv.TabIndex = 0;
+            dgv.TabIndex = 3;
             dgv.CellDoubleClick += dgv_CellDoubleClick;
             dgv.SelectionChanged += dgv_SelectionChanged;
             // 
@@ -57,7 +62,7 @@
             btnCreate.Location = new Point(829, 349);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(75, 23);
-            btnCreate.TabIndex = 1;
+            btnCreate.TabIndex = 0;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = true;
             btnCreate.Click += btnCreate_Click;
@@ -67,7 +72,7 @@
             btnExit.Location = new Point(12, 349);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
-            btnExit.TabIndex = 2;
+            btnExit.TabIndex = 4;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += button1_Click;
