@@ -1,4 +1,4 @@
-namespace BilalAsyncAwait
+namespace BilalAsyncAwaitDB
 {
     internal static class Program
     {
