@@ -1,0 +1,22 @@
+﻿CREATE TABLE PERSON (
+Id INT IDENTITY(1,1)		NOT NULL,
+FirstName	NVARCHAR(30)	NOT NULL,
+LastName	NVARCHAR(30)	NOT NULL,
+Address		NVARCHAR(50)	NOT NULL,
+City		NVARCHAR(30)	NOT NULL,
+PostalCode	INT				NOT NULL,
+Email		NVARCHAR(50)	NOT NULL,
+Phone		INT				NOT NULL,
+PRIMARY KEY (Id));
+
+INSERT INTO Person (FirstName, LastName, Address, City, PostalCode, Email, Phone) VALUES
+('Natalie', 'Richards', '25322 Rivera Stream', 'New Nathan', 9253, 'tkelly@lawson.com', 49412066),
+('Natasha', 'Stewart', '25573 Anne Motorway', 'Thomasshire', 4239, 'fgentry@yahoo.com', 97135562),
+('Rachel', 'Brooks', '1819 Gregory Street', 'South Amberland', 6098, 'jordan02@stokes-webb.net', 92870117),
+('Andrew', 'Oconnor', '21038 Michelle Trail', 'East Gregoryville', 2559, 'ldaniels@moore.info', 67980075),
+('April', 'Mendoza', '6498 Jennifer Keys Apt. 785', 'Lake Caroline', 3358, 'lance80@yahoo.com', 87896283),
+('Vanessa', 'Nelson', '237 Miller Inlet', 'Port Erin', 7482, 'dgriffin@yahoo.com', 29589553),
+('Deborah', 'Frey', '2432 Jennifer Crescent', 'Raymondton', 3235, 'lwalker@yahoo.com', 93287558),
+('Kimberly', 'Ferrell', '055 Matthew Course', 'South Michael', 9656, 'hansenrobert@king.info', 98095925),
+('Robert', 'Tyler', '25490 Barbara Extensions', 'Lake Jasonport', 8784, 'david09@yahoo.com', 52334412),
+('Tony', 'Fletcher', '38388 Sanchez River', 'Lake Michaelside', 3632, 'westyvonne@hotmail.com', 61472543);

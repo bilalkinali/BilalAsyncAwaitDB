@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "BilalAsyncAwaitDB\UI.csproj", "{D39B01A5-B6E1-4AF5-824E-1A2AFACA2149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "BilalAsyncAwaitDB\UI.csproj", "{D39B01A5-B6E1-4AF5-824E-1A2AFACA2149}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{B4EF4B15-048E-41EE-80C2-EDD93430BD18}"
 EndProject
