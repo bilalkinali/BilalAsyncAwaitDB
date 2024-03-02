@@ -19,7 +19,7 @@ namespace BilalAsyncAwaitDB
             btnUpdate.Enabled = false;
 
             btnCreate.Click += btnCreate_Click;
-            btnExit.Click += button1_Click;
+            btnExit.Click += btnExit_Click;
             btnUpdate.Click += btnUpdate_Click;
             this.Load += Overview_Load;
             dgv.CellDoubleClick += dgv_CellDoubleClick;
@@ -108,7 +108,7 @@ namespace BilalAsyncAwaitDB
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
