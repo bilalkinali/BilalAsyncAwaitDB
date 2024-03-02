@@ -19,33 +19,32 @@ namespace DataAccess
         {
             await Task.Delay(3000);
 
-            using SqlConnection dbConn = new SqlConnection(path);
-
-            string command = "INSERT PERSON VALUES (@FN, @LN, @AD, @CT, @PC, @EM, @PH)";
-
-            using SqlCommand sqlCommand = new SqlCommand(command, dbConn);
-
-            sqlCommand.Parameters.AddWithValue("@FN", p.FirstName);
-            sqlCommand.Parameters.AddWithValue("@LN", p.LastName);
-            sqlCommand.Parameters.AddWithValue("@AD", p.Address);
-            sqlCommand.Parameters.AddWithValue("@CT", p.City);
-            sqlCommand.Parameters.AddWithValue("@PC", p.PostalCode);
-            sqlCommand.Parameters.AddWithValue("@EM", p.Email);
-            sqlCommand.Parameters.AddWithValue("@PH", p.Phone);
+            string command = "INSERT PERSON VALUES (@FN, @LN, @AD, @CT, @PC, @EM, @PH)"; //          <<<--- SQL Query --*
 
             try
             {
-                await dbConn.OpenAsync();
+                // IDisposable, instead calling Dispose() in finally{} get's rid of the data hence closing the connection when done using
+                using SqlConnection dbConn = new(path); 
+                {
+                    using SqlCommand sqlCommand = new(command, dbConn);
+                    {
+                        sqlCommand.Parameters.AddWithValue("@FN", p.FirstName);
+                        sqlCommand.Parameters.AddWithValue("@LN", p.LastName);
+                        sqlCommand.Parameters.AddWithValue("@AD", p.Address);
+                        sqlCommand.Parameters.AddWithValue("@CT", p.City);
+                        sqlCommand.Parameters.AddWithValue("@PC", p.PostalCode);
+                        sqlCommand.Parameters.AddWithValue("@EM", p.Email);
+                        sqlCommand.Parameters.AddWithValue("@PH", p.Phone);
 
-                return await sqlCommand.ExecuteNonQueryAsync() > 0;
+                        await dbConn.OpenAsync();
+
+                        return await sqlCommand.ExecuteNonQueryAsync() > 0;
+                    }
+                }
             }
             catch (Exception)
             {
                 return false;
-            }
-            finally
-            {
-                await dbConn.CloseAsync();
             }
         }
         
@@ -55,41 +54,39 @@ namespace DataAccess
 
             List<Person> people = new List<Person>();
 
-            using SqlConnection dbConn = new SqlConnection(path);
-
-            string command = "SELECT * FROM PERSON";
-
-            using SqlCommand sqlCommand = new SqlCommand(command, dbConn);
+            string command = "SELECT * FROM PERSON"; //          <<<--- SQL Query --*
 
             try
             {
-                await dbConn.OpenAsync();                
-
-                SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
-
-                while (await reader.ReadAsync())
+                using SqlConnection dbConn = new(path);
                 {
-                    Person person = new Person();
-                    person.Id = (int)reader["ID"];
-                    person.FirstName = (string)reader["FirstName"];
-                    person.LastName = (string)reader["LastName"];
-                    person.Address = (string)reader["Address"];
-                    person.City = (string)reader["City"];
-                    person.PostalCode = (int)reader["PostalCode"];
-                    person.Email = (string)reader["Email"];
-                    person.Phone = (int)reader["Phone"];
-                    people.Add(person);
+                    using SqlCommand sqlCommand = new(command, dbConn);
+                    {
+                        await dbConn.OpenAsync();
+
+                        SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
+
+                        while (await reader.ReadAsync())
+                        {
+                            Person person = new Person();
+                            person.Id = (int)reader["ID"];
+                            person.FirstName = (string)reader["FirstName"];
+                            person.LastName = (string)reader["LastName"];
+                            person.Address = (string)reader["Address"];
+                            person.City = (string)reader["City"];
+                            person.PostalCode = (int)reader["PostalCode"];
+                            person.Email = (string)reader["Email"];
+                            person.Phone = (int)reader["Phone"];
+                            people.Add(person);
+                        }
+                        return people;
+                    }
                 }
             }
             catch (Exception)
             {
                 return people;
             }
-            finally
-            {
-                await dbConn.CloseAsync();
-            }
-            return people;
         }
 
         public async Task<Person> GetAsync(int id)
@@ -98,62 +95,100 @@ namespace DataAccess
 
             Person person = new Person();
 
-            SqlConnection dbConn = new SqlConnection(path);
-
-            string command = "SELECT * FROM PERSON WHERE ID = @ID";
-
-            using SqlCommand sqlCommand = new SqlCommand(command, dbConn);
-
-            sqlCommand.Parameters.AddWithValue("@ID", id);
+            string command = "SELECT * FROM PERSON WHERE ID = @ID"; //           <<<--- SQL Query --*
 
             try
             {
-                await dbConn.OpenAsync();
+                using SqlConnection dbConn = new(path);
+                {
+                    using SqlCommand sqlCommand = new(command, dbConn);
+                    {
+                        sqlCommand.Parameters.AddWithValue("@ID", id);
 
-                SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
+                        await dbConn.OpenAsync();
 
-                await reader.ReadAsync();
+                        SqlDataReader reader = await sqlCommand.ExecuteReaderAsync();
 
-                person.Id = (int)reader["ID"];
-                person.FirstName = (string)reader["FirstName"];
-                person.LastName = (string)reader["LastName"];
-                person.Address = (string)reader["Address"];
-                person.City = (string)reader["City"];
-                person.PostalCode = (int)reader["PostalCode"];
-                person.Email = (string)reader["Email"];
-                person.Phone = (int)reader["Phone"];
+                        await reader.ReadAsync();
 
+                        person.Id = (int)reader["ID"];
+                        person.FirstName = (string)reader["FirstName"];
+                        person.LastName = (string)reader["LastName"];
+                        person.Address = (string)reader["Address"];
+                        person.City = (string)reader["City"];
+                        person.PostalCode = (int)reader["PostalCode"];
+                        person.Email = (string)reader["Email"];
+                        person.Phone = (int)reader["Phone"];
+
+                        await dbConn.CloseAsync();
+                        return person;
+                    }
+                }
             }
             catch (Exception)
             {
                 return person;
             }
-            finally
-            {
-                await dbConn.CloseAsync();
-            }
-            return person;
         }
 
         public async Task<bool> UpdateAsync(Person p)
         {
-            //await Task.Delay(3000);
+            await Task.Delay(3000);
 
-            //int index = people.FindIndex(x => x.Id == p.Id);
+            string command = "UPDATE PERSON SET FirstName = @FN, LastName = @LN, Address = @AD, City = @CT, " + //           <<<--- SQL Query --*
+                "PostalCode = @PC, Email = @EM, Phone = @PH WHERE ID = @ID";
 
-            //if (index >= 0)
-            //{
-            //    people[index] = p;
-            //    return true;
-            //}
-            return false;
+            try
+            {
+                using SqlConnection dbConn = new(path);
+                {
+                    using SqlCommand sqlCommand = new(command, dbConn);
+                    {
+                        sqlCommand.Parameters.AddWithValue("@FN", p.FirstName);
+                        sqlCommand.Parameters.AddWithValue("@LN", p.LastName);
+                        sqlCommand.Parameters.AddWithValue("@AD", p.Address);
+                        sqlCommand.Parameters.AddWithValue("@CT", p.City);
+                        sqlCommand.Parameters.AddWithValue("@PC", p.PostalCode);
+                        sqlCommand.Parameters.AddWithValue("@EM", p.Email);
+                        sqlCommand.Parameters.AddWithValue("@PH", p.Phone);
+                        sqlCommand.Parameters.AddWithValue("@ID", p.Id);
+
+                        await dbConn.OpenAsync();
+
+                        return await sqlCommand.ExecuteNonQueryAsync() > 0;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            //await Task.Delay(3000);
-            //return people.RemoveAll(p => p.Id == id) > 0;
-            return true;
+            await Task.Delay(3000);
+
+            string command = "DELETE FROM PERSON WHERE ID = @ID"; //             <<<--- SQL Query --*
+
+            try
+            {
+                using SqlConnection dbConn = new(path);
+                {
+                    using SqlCommand sqlCommand = new(command, dbConn);
+                    {
+                        sqlCommand.Parameters.AddWithValue("@ID", id);
+
+                        await dbConn.OpenAsync();
+
+                        return await sqlCommand.ExecuteNonQueryAsync() > 0;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

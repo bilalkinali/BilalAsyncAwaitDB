@@ -10,13 +10,13 @@ Phone		INT				NOT NULL,
 PRIMARY KEY (Id));
 
 INSERT INTO Person (FirstName, LastName, Address, City, PostalCode, Email, Phone) VALUES
-('Natalie', 'Richards', '25322 Rivera Stream', 'New Nathan', 9253, 'tkelly@lawson.com', 49412066),
-('Natasha', 'Stewart', '25573 Anne Motorway', 'Thomasshire', 4239, 'fgentry@yahoo.com', 97135562),
-('Rachel', 'Brooks', '1819 Gregory Street', 'South Amberland', 6098, 'jordan02@stokes-webb.net', 92870117),
-('Andrew', 'Oconnor', '21038 Michelle Trail', 'East Gregoryville', 2559, 'ldaniels@moore.info', 67980075),
-('April', 'Mendoza', '6498 Jennifer Keys Apt. 785', 'Lake Caroline', 3358, 'lance80@yahoo.com', 87896283),
-('Vanessa', 'Nelson', '237 Miller Inlet', 'Port Erin', 7482, 'dgriffin@yahoo.com', 29589553),
-('Deborah', 'Frey', '2432 Jennifer Crescent', 'Raymondton', 3235, 'lwalker@yahoo.com', 93287558),
-('Kimberly', 'Ferrell', '055 Matthew Course', 'South Michael', 9656, 'hansenrobert@king.info', 98095925),
-('Robert', 'Tyler', '25490 Barbara Extensions', 'Lake Jasonport', 8784, 'david09@yahoo.com', 52334412),
-('Tony', 'Fletcher', '38388 Sanchez River', 'Lake Michaelside', 3632, 'westyvonne@hotmail.com', 61472543);
+('Emil', 'Jensen', 'Birkevej 12', 'Aalborg', 9000, 'ejensen@live.dk', 49412066),
+('Sofia', 'Nielsen', 'Egevej 8', 'Odense', 5000, 'snielsen@mail.dk', 97135562),
+('Lukas', 'Hansen', 'Ahorn Alle 3', 'Esbjerg', 6700, 'lhansen@dkmail.dk', 92870117),
+('Freja', 'Pedersen', 'Bøgevej 5', 'Randers', 8900, 'fpedersen@post.dk', 67980075),
+('Mads', 'Larsen', 'Granvej 22', 'Kolding', 6000, 'mlarsen@inbox.dk', 87896283),
+('Nora', 'Kristensen', 'Viborgvej 14', 'Horsens', 8700, 'nkristensen@webmail.dk', 29589553),
+('Anders', 'Sørensen', 'Fyrvej 6', 'Aarhus', 8000, 'asorensen@danmail.dk', 93287558),
+('Ida', 'Rasmussen', 'Kastanievej 11', 'Silkeborg', 8600, 'irasmussen@danpost.dk', 98095925),
+('Anna', 'Mortensen', 'Esbjergvej 9', 'Herning', 7400, 'amortensen@dkweb.dk', 52334412),
+('Jakob', 'Thomsen', 'Almevej 4', 'Vejle', 7100, 'jthomsen@safe.dk', 61472543);
