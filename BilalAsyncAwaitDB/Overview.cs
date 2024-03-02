@@ -21,9 +21,11 @@ namespace BilalAsyncAwaitDB
             btnCreate.Click += btnCreate_Click;
             btnExit.Click += btnExit_Click;
             btnUpdate.Click += btnUpdate_Click;
-            this.Load += Overview_Load;
+            
             dgv.CellDoubleClick += dgv_CellDoubleClick;
             dgv.SelectionChanged += dgv_SelectionChanged;
+
+            Load += Overview_Load;
         }
 
         private void btnUpdate_Click(object? sender, EventArgs e)
@@ -76,29 +78,38 @@ namespace BilalAsyncAwaitDB
             try
             {
                 dgv.DataSource = await bl.GetAsync();
-                lblLoading.Visible = false;
+                if (dgv.RowCount > 0)
+                {
+                    lblLoading.Visible = false;
 
-                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dgv.Columns[0].Visible = false;
-                dgv.Columns["FirstName"].HeaderText = "Firstname";
-                dgv.Columns["LastName"].HeaderText = "Lastname";
-                dgv.Columns["PostalCode"].HeaderText = "Postal";
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dgv.Columns[0].Visible = false;
+                    dgv.Columns["FirstName"].HeaderText = "Firstname";
+                    dgv.Columns["LastName"].HeaderText = "Lastname";
+                    dgv.Columns["PostalCode"].HeaderText = "Postal";
 
 
-                dgv.Columns["FirstName"].MinimumWidth = 50;
-                dgv.Columns["LastName"].MinimumWidth = 50;
-                dgv.Columns["Address"].MinimumWidth = 180;
-                dgv.Columns["City"].MinimumWidth = 70;
-                dgv.Columns["PostalCode"].MinimumWidth = 50;
-                dgv.Columns["Email"].MinimumWidth = 150;
-                dgv.Columns["Phone"].MinimumWidth = 60;
+                    dgv.Columns["FirstName"].MinimumWidth = 50;
+                    dgv.Columns["LastName"].MinimumWidth = 50;
+                    dgv.Columns["Address"].MinimumWidth = 180;
+                    dgv.Columns["City"].MinimumWidth = 70;
+                    dgv.Columns["PostalCode"].MinimumWidth = 50;
+                    dgv.Columns["Email"].MinimumWidth = 150;
+                    dgv.Columns["Phone"].MinimumWidth = 60;
 
-                dgv.Columns["Address"].FillWeight = 150;
-                dgv.Columns["Email"].FillWeight = 150;
-                dgv.Columns["PostalCode"].FillWeight = 50;
-                dgv.Columns["Phone"].FillWeight = 80;
+                    dgv.Columns["Address"].FillWeight = 150;
+                    dgv.Columns["Email"].FillWeight = 150;
+                    dgv.Columns["PostalCode"].FillWeight = 50;
+                    dgv.Columns["Phone"].FillWeight = 80;
 
-                tboxTotal.Text = dgv.RowCount.ToString();
+                    tboxTotal.Text = dgv.RowCount.ToString(); 
+                }
+                else
+                {
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    lblLoading.Text = "No data";
+                    lblLoading.Visible = true;
+                }
 
             }
             catch (Exception)

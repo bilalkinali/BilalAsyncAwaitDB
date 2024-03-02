@@ -214,7 +214,7 @@
             // lblAction
             // 
             lblAction.AutoSize = true;
-            lblAction.Location = new Point(138, 353);
+            lblAction.Location = new Point(140, 353);
             lblAction.Name = "lblAction";
             lblAction.Size = new Size(49, 15);
             lblAction.TabIndex = 32;

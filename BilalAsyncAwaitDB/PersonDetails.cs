@@ -42,17 +42,17 @@ namespace UI
             fail = "Failed!";
             load = "Loading data...";
 
-            this.Load += PersonDetails_Load;
-
             btnUpdate.Click += bntUpdate_Click;
             btnDelete.Click += btnDelete_Click;
             btnBack.Click += btnBack_Click;
 
-            // Disable editing and show data load text
-            DataLoading();
+            Load += PersonDetails_Load;            
         }
         private async void PersonDetails_Load(object sender, EventArgs e)
         {
+            // Disable editing and show data load text
+            DataLoading();
+
             // Change tboxtext to string load
             lblAction.Text = tboxFirstName.PlaceholderText = tboxLastName.PlaceholderText =
             tboxAddress.PlaceholderText = tboxCity.PlaceholderText =
@@ -61,10 +61,7 @@ namespace UI
 
             p = await bl.GetAsync(id);
 
-            // Enable editing
-            DataLoaded();
-
-            if (p != null)
+            if (p.Id > 0)
             {
                 tboxFirstName.Text = p.FirstName;
                 tboxLastName.Text = p.LastName;
@@ -75,7 +72,19 @@ namespace UI
                 tboxPhone.Text = p.Phone.ToString();
 
                 btnDelete.Enabled = true;
+
+                // Enable editing
+                DataLoaded();
             }
+            else
+            {
+                lblAction.Text = fail;
+                lblAction.Visible = true;
+                MessageBox.Show(
+                    "The contact could not be updated due to an unexpected error.\n\n" +
+                    "Couldn't connect to server.",
+                    "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
         private async void bntUpdate_Click(object sender, EventArgs e)
         {

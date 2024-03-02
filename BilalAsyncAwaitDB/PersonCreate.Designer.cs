@@ -46,6 +46,7 @@
             btnBack = new Button();
             panel1 = new Panel();
             lblLoading = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // lblFirstName
@@ -69,7 +70,7 @@
             // lblAddress
             // 
             lblAddress.AutoSize = true;
-            lblAddress.Location = new Point(57, 132);
+            lblAddress.Location = new Point(57, 130);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(52, 15);
             lblAddress.TabIndex = 2;
@@ -87,7 +88,7 @@
             // lblPostalCode
             // 
             lblPostalCode.AutoSize = true;
-            lblPostalCode.Location = new Point(38, 219);
+            lblPostalCode.Location = new Point(38, 218);
             lblPostalCode.Name = "lblPostalCode";
             lblPostalCode.Size = new Size(71, 15);
             lblPostalCode.TabIndex = 4;
@@ -96,7 +97,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(65, 260);
+            lblEmail.Location = new Point(65, 262);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(44, 15);
             lblEmail.TabIndex = 5;
@@ -105,7 +106,7 @@
             // lblPhone
             // 
             lblPhone.AutoSize = true;
-            lblPhone.Location = new Point(65, 305);
+            lblPhone.Location = new Point(65, 306);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(44, 15);
             lblPhone.TabIndex = 6;
@@ -113,7 +114,7 @@
             // 
             // tboxFirstName
             // 
-            tboxFirstName.Location = new Point(111, 39);
+            tboxFirstName.Location = new Point(91, 17);
             tboxFirstName.MaxLength = 30;
             tboxFirstName.Name = "tboxFirstName";
             tboxFirstName.Size = new Size(96, 23);
@@ -122,7 +123,7 @@
             // 
             // tboxLastName
             // 
-            tboxLastName.Location = new Point(111, 83);
+            tboxLastName.Location = new Point(91, 61);
             tboxLastName.MaxLength = 30;
             tboxLastName.Name = "tboxLastName";
             tboxLastName.Size = new Size(96, 23);
@@ -131,7 +132,7 @@
             // 
             // tboxAddress
             // 
-            tboxAddress.Location = new Point(111, 129);
+            tboxAddress.Location = new Point(91, 105);
             tboxAddress.MaxLength = 30;
             tboxAddress.Name = "tboxAddress";
             tboxAddress.Size = new Size(174, 23);
@@ -140,7 +141,7 @@
             // 
             // tboxCity
             // 
-            tboxCity.Location = new Point(111, 171);
+            tboxCity.Location = new Point(91, 149);
             tboxCity.MaxLength = 30;
             tboxCity.Name = "tboxCity";
             tboxCity.Size = new Size(126, 23);
@@ -149,7 +150,7 @@
             // 
             // tboxPostCode
             // 
-            tboxPostCode.Location = new Point(111, 216);
+            tboxPostCode.Location = new Point(91, 193);
             tboxPostCode.MaxLength = 4;
             tboxPostCode.Name = "tboxPostCode";
             tboxPostCode.Size = new Size(39, 23);
@@ -158,7 +159,7 @@
             // 
             // tboxEmail
             // 
-            tboxEmail.Location = new Point(111, 257);
+            tboxEmail.Location = new Point(91, 237);
             tboxEmail.MaxLength = 50;
             tboxEmail.Name = "tboxEmail";
             tboxEmail.Size = new Size(174, 23);
@@ -167,7 +168,7 @@
             // 
             // tboxPhone
             // 
-            tboxPhone.Location = new Point(111, 302);
+            tboxPhone.Location = new Point(91, 281);
             tboxPhone.MaxLength = 8;
             tboxPhone.Name = "tboxPhone";
             tboxPhone.Size = new Size(69, 23);
@@ -198,6 +199,13 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(tboxCity);
+            panel1.Controls.Add(tboxPostCode);
+            panel1.Controls.Add(tboxEmail);
+            panel1.Controls.Add(tboxFirstName);
+            panel1.Controls.Add(tboxLastName);
+            panel1.Controls.Add(tboxAddress);
+            panel1.Controls.Add(tboxPhone);
             panel1.Location = new Point(19, 21);
             panel1.Name = "panel1";
             panel1.Size = new Size(299, 329);
@@ -206,7 +214,7 @@
             // lblLoading
             // 
             lblLoading.AutoSize = true;
-            lblLoading.Location = new Point(139, 353);
+            lblLoading.Location = new Point(140, 353);
             lblLoading.Name = "lblLoading";
             lblLoading.Size = new Size(61, 15);
             lblLoading.TabIndex = 33;
@@ -220,13 +228,6 @@
             Controls.Add(lblLoading);
             Controls.Add(btnBack);
             Controls.Add(btnCreate);
-            Controls.Add(tboxPhone);
-            Controls.Add(tboxEmail);
-            Controls.Add(tboxPostCode);
-            Controls.Add(tboxCity);
-            Controls.Add(tboxAddress);
-            Controls.Add(tboxLastName);
-            Controls.Add(tboxFirstName);
             Controls.Add(lblPhone);
             Controls.Add(lblEmail);
             Controls.Add(lblPostalCode);
@@ -240,6 +241,8 @@
             Name = "PersonCreate";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Person Create";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

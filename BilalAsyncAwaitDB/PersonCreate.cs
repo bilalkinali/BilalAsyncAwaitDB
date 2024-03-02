@@ -33,7 +33,7 @@ namespace UI
 
             create = "Creating...";
             success = "Completed!";
-            fail = "Failed";
+            fail = "Failed!";
 
             btnCreate.Enabled = false;
             lblLoading.Enabled = false;
