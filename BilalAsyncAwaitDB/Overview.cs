@@ -77,8 +77,8 @@ namespace BilalAsyncAwaitDB
             {
                 dgv.DataSource = await bl.GetAsync();
                 lblLoading.Visible = false;
-                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgv.Columns[0].Visible = false;
                 dgv.Columns["FirstName"].HeaderText = "Firstname";
                 dgv.Columns["LastName"].HeaderText = "Lastname";
