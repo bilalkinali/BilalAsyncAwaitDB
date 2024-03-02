@@ -20,9 +20,7 @@ namespace UI
 
         bool vFirstname, vLastname, vAddress, vCity, vPost, vEmail, vPhone;
 
-        string create;
-        string success;
-        string fail;
+        string create, success, fail;
 
         public event Action OnPersonCreateOpen;
 

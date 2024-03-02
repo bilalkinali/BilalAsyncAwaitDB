@@ -80,8 +80,8 @@ namespace BilalAsyncAwaitDB
                 dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 dgv.Columns[0].Visible = false;
-                dgv.Columns["FirstName"].HeaderText = "First name";
-                dgv.Columns["LastName"].HeaderText = "Last name";
+                dgv.Columns["FirstName"].HeaderText = "Firstname";
+                dgv.Columns["LastName"].HeaderText = "Lastname";
                 dgv.Columns["PostalCode"].HeaderText = "Postal";
 
 
