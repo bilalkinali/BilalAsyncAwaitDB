@@ -35,6 +35,8 @@
             tboxSelected = new TextBox();
             lblTotal = new Label();
             tboxTotal = new TextBox();
+            lblLoading = new Label();
+            btnUpdate = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             SuspendLayout();
             // 
@@ -43,19 +45,17 @@
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToResizeRows = false;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.Location = new Point(12, 12);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
+            dgv.RowHeadersVisible = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.ShowCellToolTips = false;
             dgv.ShowEditingIcon = false;
             dgv.ShowRowErrors = false;
             dgv.Size = new Size(892, 306);
             dgv.TabIndex = 3;
-            dgv.CellDoubleClick += dgv_CellDoubleClick;
-            dgv.SelectionChanged += dgv_SelectionChanged;
             // 
             // btnCreate
             // 
@@ -65,7 +65,6 @@
             btnCreate.TabIndex = 0;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = true;
-            btnCreate.Click += btnCreate_Click;
             // 
             // btnExit
             // 
@@ -75,7 +74,6 @@
             btnExit.TabIndex = 4;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
-            btnExit.Click += button1_Click;
             // 
             // lblSelected
             // 
@@ -109,17 +107,37 @@
             // 
             tboxTotal.BackColor = SystemColors.Control;
             tboxTotal.BorderStyle = BorderStyle.None;
-            tboxTotal.Location = new Point(44, 321);
+            tboxTotal.Location = new Point(46, 321);
             tboxTotal.Name = "tboxTotal";
             tboxTotal.ReadOnly = true;
             tboxTotal.Size = new Size(30, 16);
             tboxTotal.TabIndex = 6;
+            // 
+            // lblLoading
+            // 
+            lblLoading.AutoSize = true;
+            lblLoading.Location = new Point(416, 322);
+            lblLoading.Name = "lblLoading";
+            lblLoading.Size = new Size(85, 15);
+            lblLoading.TabIndex = 7;
+            lblLoading.Text = "Loading data...";
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(735, 349);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(75, 23);
+            btnUpdate.TabIndex = 8;
+            btnUpdate.Text = "Edit";
+            btnUpdate.UseVisualStyleBackColor = true;
             // 
             // Overview
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(916, 388);
+            Controls.Add(btnUpdate);
+            Controls.Add(lblLoading);
             Controls.Add(tboxTotal);
             Controls.Add(lblTotal);
             Controls.Add(tboxSelected);
@@ -132,7 +150,6 @@
             Name = "Overview";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Person Manager";
-            Load += Overview_Load;
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -147,5 +164,7 @@
         private TextBox tboxSelected;
         private Label lblTotal;
         private TextBox tboxTotal;
+        private Label lblLoading;
+        private Button btnUpdate;
     }
 }

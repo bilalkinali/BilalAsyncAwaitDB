@@ -45,6 +45,7 @@
             btnCreate = new Button();
             btnBack = new Button();
             panel1 = new Panel();
+            lblLoading = new Label();
             SuspendLayout();
             // 
             // lblFirstName
@@ -142,7 +143,7 @@
             tboxCity.Location = new Point(111, 171);
             tboxCity.MaxLength = 30;
             tboxCity.Name = "tboxCity";
-            tboxCity.Size = new Size(174, 23);
+            tboxCity.Size = new Size(126, 23);
             tboxCity.TabIndex = 10;
             tboxCity.TextChanged += tboxCity_TextChanged;
             // 
@@ -202,11 +203,21 @@
             panel1.Size = new Size(299, 329);
             panel1.TabIndex = 32;
             // 
+            // lblLoading
+            // 
+            lblLoading.AutoSize = true;
+            lblLoading.Location = new Point(139, 353);
+            lblLoading.Name = "lblLoading";
+            lblLoading.Size = new Size(61, 15);
+            lblLoading.TabIndex = 33;
+            lblLoading.Text = "Creating...";
+            // 
             // PersonCreate
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(340, 424);
+            Controls.Add(lblLoading);
             Controls.Add(btnBack);
             Controls.Add(btnCreate);
             Controls.Add(tboxPhone);
@@ -252,5 +263,6 @@
         private Button btnCreate;
         private Button btnBack;
         private Panel panel1;
+        private Label lblLoading;
     }
 }

@@ -5,9 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BilalAsyncAwaitDB;
 using BusinessLogic;
 using Models;
 using Models.Validation;
@@ -19,9 +21,10 @@ namespace UI
         PersonBL bl;
         Person p;
         PersonValidator validator;
-        int id;
 
+        int id;
         bool vFirstname, vLastname, vAddress, vCity, vPost, vEmail, vPhone;
+        string delete, update, success, fail, load;
 
         public event Action OnPersonDetailsOpen;
 
@@ -33,12 +36,33 @@ namespace UI
 
             InitializeComponent();
 
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            delete = "Deleting...";
+            update = "Updating...";
+            success = "Completed!";
+            fail = "Failed!";
+            load = "Loading data...";
+
+            this.Load += PersonDetails_Load;
+
+            btnUpdate.Click += bntUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
+            btnBack.Click += btnBack_Click;
+
+            // Disable editing and show data load text
+            DataLoading();
         }
         private async void PersonDetails_Load(object sender, EventArgs e)
         {
+            // Change tboxtext to string load
+            lblAction.Text = tboxFirstName.PlaceholderText = tboxLastName.PlaceholderText =
+            tboxAddress.PlaceholderText = tboxCity.PlaceholderText =
+            tboxPostCode.PlaceholderText = tboxEmail.PlaceholderText =
+            tboxPhone.PlaceholderText = load;
+
             p = await bl.GetAsync(id);
+
+            // Enable editing
+            DataLoaded();
 
             if (p != null)
             {
@@ -55,6 +79,7 @@ namespace UI
         }
         private async void bntUpdate_Click(object sender, EventArgs e)
         {
+            // Promp user for update confirmation
             DialogResult answer = MessageBox.Show(
                 "Are you sure you want to update this contact?\n\n" +
                 $"{tboxFirstName.Text} {tboxLastName.Text}\n" +
@@ -67,10 +92,14 @@ namespace UI
 
             if (answer == DialogResult.Yes)
             {
-                btnUpdate.Enabled = false;
+                lblAction.Text = update;    // Change progress text
+                lblAction.Visible = true;   // Make it visible
+                btnUpdate.Enabled = false;  // Disable multiple updates
+                btnDelete.Enabled = false;  // Disable delete while updating
 
                 try
                 {
+                    // Set the attributes from tboxes
                     p.FirstName = tboxFirstName.Text;
                     p.LastName = tboxLastName.Text;
                     p.Address = tboxAddress.Text;
@@ -79,17 +108,19 @@ namespace UI
                     p.Email = tboxEmail.Text;
                     p.Phone = int.Parse(tboxPhone.Text);
 
-                    bool result = await bl.UpdateAsync(p);
+                    bool result = await bl.UpdateAsync(p);  // Wait for result
 
                     if (result)
                     {
-                        OnPersonDetailsOpen.Invoke();
+                        lblAction.Text = success;
+                        OnPersonDetailsOpen.Invoke();       // Update the dgv using Invoke
                         MessageBox.Show(
                             "The contact has been successfully updated.",
                             "Contact Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        lblAction.Text = fail;
                         MessageBox.Show(
                             "The contact could not be updated due to an unexpected error.\n\n" +
                             "Contact doesn't exist.",
@@ -98,12 +129,16 @@ namespace UI
                 }
                 catch (Exception)
                 {
+                    lblAction.Text = fail;
                     MessageBox.Show(
                         "An unknown error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
+                    // Back to default
+                    lblAction.Visible = false;
                     btnUpdate.Enabled = true;
+                    btnDelete.Enabled = true;
                 }
             }
         }
@@ -115,6 +150,7 @@ namespace UI
                 return;
             }
 
+            // Confirmation on deletion
             DialogResult answer = MessageBox.Show(
                 $"Are you sure you want to delete this contact?\n\n" +
                 $"Name: {p.FirstName} {p.LastName}\n" +
@@ -125,8 +161,9 @@ namespace UI
 
             if (answer == DialogResult.Yes)
             {
-                btnDelete.Enabled = false;
-                btnUpdate.Enabled = false;
+                lblAction.Text = delete;
+                
+                DataLoading();      // Disable edits
 
                 try
                 {
@@ -134,7 +171,9 @@ namespace UI
 
                     if (result)
                     {
-                        OnPersonDetailsOpen.Invoke();
+                        lblAction.Text = success;
+
+                        OnPersonDetailsOpen.Invoke();   // Update the dgv if success
 
                         MessageBox.Show(
                             "The contact has been successfully removed.",
@@ -144,8 +183,8 @@ namespace UI
                     }
                     else
                     {
-                        btnDelete.Enabled = true;
-                        btnUpdate.Enabled = true;
+                        lblAction.Text = fail;
+
                         MessageBox.Show(
                             "The contact could not be removed due to an unexpected error.\n\n" +
                             "Contact doesn't exits.",
@@ -154,10 +193,14 @@ namespace UI
                 }
                 catch (Exception)
                 {
-                    btnDelete.Enabled = true;
-                    btnUpdate.Enabled = true;
+                    lblAction.Text = fail;
                     MessageBox.Show(
                         $"An unknown error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    // Enable edits
+                    DataLoaded();
                 }
             }
         }
@@ -165,6 +208,45 @@ namespace UI
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void DataLoading()
+        {
+            lblAction.Enabled = false;
+            lblAction.Visible = true;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+
+            // Disable and set placeholder for all textboxes
+            tboxFirstName.BorderStyle = tboxLastName.BorderStyle =
+            tboxAddress.BorderStyle = tboxCity.BorderStyle =
+            tboxPostCode.BorderStyle = tboxEmail.BorderStyle =
+            tboxPhone.BorderStyle = BorderStyle.None;
+
+            tboxFirstName.Enabled = tboxLastName.Enabled =
+            tboxAddress.Enabled = tboxCity.Enabled =
+            tboxPostCode.Enabled = tboxEmail.Enabled =
+            tboxPhone.Enabled = false;
+        }
+
+        private void DataLoaded()
+        {
+            lblAction.Visible = false;
+            // Enable and clear placeholder for all textboxes
+            tboxFirstName.BorderStyle = tboxLastName.BorderStyle =
+            tboxAddress.BorderStyle = tboxCity.BorderStyle =
+            tboxPostCode.BorderStyle = tboxEmail.BorderStyle =
+            tboxPhone.BorderStyle = BorderStyle.Fixed3D;
+
+            tboxFirstName.Enabled = tboxLastName.Enabled =
+            tboxAddress.Enabled = tboxCity.Enabled =
+            tboxPostCode.Enabled = tboxEmail.Enabled =
+            tboxPhone.Enabled = true;
+
+            tboxFirstName.PlaceholderText = tboxLastName.PlaceholderText =
+            tboxAddress.PlaceholderText = tboxCity.PlaceholderText =
+            tboxPostCode.PlaceholderText = tboxEmail.PlaceholderText =
+            tboxPhone.PlaceholderText = string.Empty;
         }
 
         private void tboxFirstName_TextChanged(object sender, EventArgs e)

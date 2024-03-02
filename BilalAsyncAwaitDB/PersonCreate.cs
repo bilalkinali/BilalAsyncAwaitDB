@@ -20,6 +20,10 @@ namespace UI
 
         bool vFirstname, vLastname, vAddress, vCity, vPost, vEmail, vPhone;
 
+        string create;
+        string success;
+        string fail;
+
         public event Action OnPersonCreateOpen;
 
         public PersonCreate(PersonBL blInstance)
@@ -29,11 +33,19 @@ namespace UI
 
             InitializeComponent();
 
+            create = "Creating...";
+            success = "Completed!";
+            fail = "Failed";
+
             btnCreate.Enabled = false;
+            lblLoading.Enabled = false;
+            lblLoading.Visible = false;
         }
 
         private async void btnCreate_Click(object sender, EventArgs e)
         {
+            lblLoading.Text = create;
+            lblLoading.Visible = true;
             try
             {
                 Person p = new Person()
@@ -51,6 +63,8 @@ namespace UI
 
                 if (result)
                 {
+                    lblLoading.Text = success;
+
                     OnPersonCreateOpen.Invoke();
                     MessageBox.Show(
                         "The contact has been successfully created.",
@@ -58,6 +72,8 @@ namespace UI
                 }
                 else
                 {
+                    lblLoading.Text = fail;
+
                     MessageBox.Show(
                         "The contact could not be created due to an unexpected error.\n\n" +
                         "Please try again later or contact support.",
@@ -66,8 +82,13 @@ namespace UI
             }
             catch (Exception)
             {
+                lblLoading.Text = fail;
                 MessageBox.Show(
                     $"An unknown error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                lblLoading.Visible = false;
             }
         }
 
